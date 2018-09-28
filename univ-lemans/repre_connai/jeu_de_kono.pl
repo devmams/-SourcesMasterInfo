@@ -17,15 +17,14 @@ succAlpha(e,f).
 succAlpha(f,g).
 succAlpha(g,h).
 
-afficherGrille(G) :- afficheLigne([L1|G1]),
-                    afficheLigne([L2|G2]),
-                    afficheLigne([L3|G3]),
-                    afficheLigne(G4).
+afficherLigne([],N) :- write('|'), nl.
+afficherLigne([E|L],N) :- atom_concat('|',N,X), write(X), atom_concat('|',E,X1), write(X1), afficherLigne(L,N).
 
-aficherLigne(L) :- write(L),nl.
+afficherGrille([]).
+afficherGrille([L|G]) :- afficherLigne(L,0), afficherGrille(G).
 
-
-% afficherGrille([[1,2,3,4],[5,6,7,8]].
+% afficherGrille([['X','X','X','X'],['X','X','X','X'],['O','O','O','O'],['O','O','O','O']]).
+% afficherGrille([[1,2,3,4],[1,2,3,4],[5,6,7,8],[5,6,7,8]]).
 
 
 
