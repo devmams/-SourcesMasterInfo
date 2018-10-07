@@ -4,8 +4,8 @@
 
 /* Fonctions d'affections */
 
-extern 
-void 
+extern
+void
 elem_cell_affecter( elem_t * elem,
 		    const cell_t cell )
 {
@@ -17,10 +17,10 @@ void
 elem_etat_affecter( elem_t * elem ,
 		    const etat_t etat )
 {
-     elem->etat = etat ; 
+     elem->etat = etat ;
 }
 
-extern 
+extern
 int
 elem_sem_creer( elem_t * elem )
 {
@@ -48,7 +48,7 @@ elem_sem_creer( elem_t * elem )
   return(0) ;
 }
 
-extern 
+extern
 int
 elem_sem_verrouiller( elem_t * elem )
 {
@@ -63,12 +63,12 @@ elem_sem_verrouiller( elem_t * elem )
   return(0) ;
 }
 
-extern 
+extern
 int
 elem_sem_deverrouiller( elem_t * elem )
 {
   struct sembuf op_V = { 0 , +1 , SEM_UNDO };
-  
+
   if( semop(  elem->sem , &op_V , 1 ) == -1 )
   {
     perror("elem_sem_deverrouiller: Pb semop " );
@@ -79,7 +79,7 @@ elem_sem_deverrouiller( elem_t * elem )
 }
 
 
-extern 
+extern
 int
 elem_sem_detruire( elem_t * elem )
 {
@@ -97,7 +97,7 @@ elem_sem_detruire( elem_t * elem )
 /* Fonctions de lectures */
 
 /* - des infos */
-extern 
+extern
 cell_t
 elem_cell_lire( const elem_t elem )
 {
@@ -109,12 +109,12 @@ extern
 etat_t
 elem_etat_lire( const elem_t elem )
 {
-  return(elem.etat) ; 
+  return(elem.etat) ;
 }
 
 /* - du semaphore */
-extern 
-int 
+extern
+int
 elem_sem_lire( const elem_t elem )
 {
   char msgerr[256];
@@ -122,7 +122,7 @@ elem_sem_lire( const elem_t elem )
   if( (val = semctl( elem.sem , 0 , GETVAL )) == -1 )
     {
       sprintf( msgerr , "elem_sem_lire: Pb semctl avec cellule [%c,%d] --> %d\n, operation GETVAL\n" ,
-	       cell_marque_lire(elem_cell_lire(elem)) , 
+	       cell_marque_lire(elem_cell_lire(elem)) ,
 	       cell_pid_lire(elem_cell_lire(elem)) ,
 	       val ) ;
       perror(msgerr);
@@ -134,7 +134,7 @@ elem_sem_lire( const elem_t elem )
 
 /* Fonctions d'affichage */
 
-extern 
+extern
 void
 elem_afficher( const elem_t elem )
 {
@@ -145,7 +145,7 @@ elem_afficher( const elem_t elem )
 
 /*
  * Test d'un element decanille
- * Retour VRAI si decanille 
+ * Retour VRAI si decanille
  *        FAUX sinon
  */
 
@@ -153,7 +153,7 @@ extern
 booleen_t
 elem_decanille( const elem_t  elem )
 {
-  if( elem.etat == DECANILLE ) 
+  if( elem.etat == DECANILLE )
     return(VRAI) ;
   else
     return(FAUX) ;
@@ -164,12 +164,12 @@ elem_decanille( const elem_t  elem )
  * Comparaison de 2 elements e1 et e2
  * retour < 0 si e1 < e2
  *        = 0 si e1 = e2
- *        > 0 si e1 > e2 
+ *        > 0 si e1 > e2
  */
 
-extern 
+extern
 int
-elem_comparer( const elem_t e1 , const elem_t e2 ) 
+elem_comparer( const elem_t e1 , const elem_t e2 )
 {
   return( cell_comparer( e1.cell , e2.cell ) ) ;
 }
