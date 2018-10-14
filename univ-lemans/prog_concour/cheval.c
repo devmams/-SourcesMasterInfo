@@ -1,4 +1,6 @@
-/* Nom : DIALLO MAMADOU */
+/* Nom : DIALLO
+   Prenom : MAMADOU
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
