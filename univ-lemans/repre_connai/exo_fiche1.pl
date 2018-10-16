@@ -21,7 +21,7 @@ plat(P) :- viande(P).
 plat(P) :- poisson(P).
 
 % Quels sont les menus simples avec des crudités en entrée
-m_s_a_crudite_en_entrees(E, P, D) :- entree(E), E == 'crudites' , menu_simple(E, P, D).
+m_s_a_crudite_en_entrees(E, P, D) :- menu_simple(E, P, D) , E == 'crudites'.
 
 % Peut-on avoir un menu avec des crudités et une mousse au chocolat ?
 % solution : rajouter un dessert mousse_choco
@@ -35,19 +35,3 @@ menu_avec_poisson(E,P,D) :- plat(P), poisson(P), menu_simple(E, P, D).
 % Quels sont les menus avec du melon en entrée et du poisson comme plat ?
 
 menu_melon_poisson(E,P,D) :- entree(E), E == 'melon', menu_avec_poisson(E,P,D).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% 
