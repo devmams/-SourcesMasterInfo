@@ -32,19 +32,53 @@ static void arret( int sig )
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 aire_t * A  = NULL ;
-ecran_t * ecran  = NULL ;
+ecran_t * ecran;
+int berr = 0;
 err_t cr = OK ;
-
 char mess[ECRAN_LG_MESS];
 
 static void fonc(bille_t *bille){
+  // bille_t * bille = NULL;
+
+  // pthread_mutex_lock(&mutex);
+  /* Creation des billes */
+
+  // if( ( bille = bille_creer( direction_random() ,
+  //          rand()%BILLE_VITESSE_MAX ,
+  //          COORD_NULL ,
+  //          '*' ) ) == BILLE_NULL ){
+  //   sprintf( mess , "Pb creation bille bille %d\n" , b );
+  //   ecran_message_pause_afficher( ecran , mess  ) ;
+  //   exit(-1) ;
+  // }
+
+  /* Positionnements et affichages des billes */
+  // ecran_message_pause_afficher( ecran , "Positionnements des billes sur l'ecran" ) ;
+  // sprintf( mess , "Pose de la bille %d\n" , b ) ;
+  // ecran_message_afficher( ecran , mess ) ;
+  // if( ( cr = ecran_bille_positionner( ecran , A , bille ) ) ){
+  //   sprintf( mess , "Pb lors de la pose de la bille %d" , b ) ;
+  //   ecran_message_pause_afficher( ecran , mess ) ;
+  //   erreur_afficher(cr) ;
+  //   ecran_stderr_afficher(ecran) ;
+  //   exit(-1) ;
+  // }
+  // pthread_mutex_unlock(&mutex);
+
+  ecran_message_afficher( ecran , "Envoyez un signal pour continuer" ) ;
+  pause() ;
 
   /* Deplacements des billes l'une apres l'autre */
+  ecran_message_pause_afficher( ecran , "Test deplacement des billes, (Deplacements jusqu'a un signal)" ) ;
+
+  // while( ! aire_vide(A) ){
     pthread_mutex_lock(&mutex);
 	  /* Deplacement d'une bille */
 	  if( ecran_bille_deplacer( ecran , A, bille ) ){
+      sprintf( mess ,  "Pb lors du deplacement de la bille %d", berr ) ;
       ecran_message_pause_afficher( ecran , mess ) ;
       ecran_stderr_afficher( ecran ) ;
+      goto fin ;
     }
     pthread_mutex_unlock(&mutex);
 
@@ -55,28 +89,44 @@ static void fonc(bille_t *bille){
 	  else{
       pthread_mutex_lock(&mutex);
       /* Desintegration de la bille */
+      sprintf( mess , "Desintegration de la bille %d" , berr ) ;
       ecran_message_afficher( ecran , mess ) ;
       ecran_bille_desintegrer( ecran , bille ) ;
 
       /* On enleve cette bille de l'aire */
       if( aire_bille_enlever( A , bille ) ){
+	      sprintf( mess , "Pb lors de l'enlevement de la bille %d sur l'aire", berr ) ;
 		    ecran_message_pause_afficher( ecran , mess ) ;
 		    ecran_stderr_afficher( ecran ) ;
+		    // goto fin ;
 		  }
       if( bille_detruire( &bille ) ){
+	      sprintf( mess , "Pb lors de la destruction de la bille %d", berr ) ;
 	      ecran_message_pause_afficher( ecran , mess ) ;
 	      ecran_stderr_afficher( ecran ) ;
+	      goto fin ;
 	    }
       pthread_mutex_unlock(&mutex);
 
     }
+	// }
 
+ fin:
+  ecran_message_pause_afficher( ecran , "Arret" ) ;
+  ecran_message_pause_afficher( ecran , "Destruction de la structure ecran" ) ;
+  ecran_detruire(&ecran)  ;
+  printf("\nDestruction aire\n" ) ;
+  aire_detruire( &A)  ;
 } //end_fonc
 
 
 int
 main( int argc , char * argv[] )
 {
+  // // aire_t * A  = NULL ;
+  // err_t cr = OK ;
+  // // ecran_t * ecran  = NULL ;
+  // char mess[ECRAN_LG_MESS] ;
 
   signal( SIGINT , arret ) ;
 
@@ -179,12 +229,6 @@ main( int argc , char * argv[] )
         pthread_join(thread_id[i],NULL);
       }
     }
-
-  ecran_message_pause_afficher( ecran , "Arret" ) ;
-  ecran_message_pause_afficher( ecran , "Destruction de la structure ecran" ) ;
-  ecran_detruire(&ecran)  ;
-  printf("\nDestruction aire\n" ) ;
-  aire_detruire( &A)  ;
   printf("\n\n\t===========Fin %s==========\n\n" , argv[0] );
   pthread_mutex_destroy(&mutex);
   return(0) ;
