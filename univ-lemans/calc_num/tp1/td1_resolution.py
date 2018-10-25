@@ -8,7 +8,8 @@
 
 
 f = open("text.txt","r",encoding="utf8")
-if f.mode == 'r':
-    res = f.read()
-    print(res)
+for ligne in f:
+    print(ligne)
+f = open("text.txt","w",encoding="utf8")
+f.write("M1 : premiere annez de master")
 f.close()
