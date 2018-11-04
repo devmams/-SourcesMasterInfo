@@ -28,9 +28,6 @@ extern moniteur_voie_unique_t * moniteur_voie_unique_creer( const train_id_t nb 
 
   /* Initialisations du moniteur */
 
-  /***********/
-  /* A FAIRE */
-  /***********/
   pthread_mutex_init(&moniteur->mutex_moniteur, NULL);
   pthread_cond_init(&moniteur->cond_Vide, NULL);
   pthread_cond_init(&moniteur->cond_Pleine, NULL);
@@ -53,9 +50,6 @@ extern int moniteur_voie_unique_detruire( moniteur_voie_unique_t ** moniteur )
 
   /* Destructions des attribiuts du moniteur */
 
-  /***********/
-  /* A FAIRE */
-  /***********/
   pthread_mutex_destroy(&((*moniteur)->mutex_moniteur));
   pthread_cond_destroy(&((*moniteur)->cond_Vide));
   pthread_cond_destroy(&((*moniteur)->cond_Pleine));
@@ -77,11 +71,12 @@ extern int moniteur_voie_unique_detruire( moniteur_voie_unique_t ** moniteur )
 
 extern void moniteur_voie_unique_entree_ouest( moniteur_voie_unique_t * moniteur )
 {
-  /***********/
-  /* A FAIRE */
-  /***********/
   pthread_mutex_lock(&moniteur->mutex_moniteur);
 
+
+  if (moniteur->nb_train_est_ouest == 0 && moniteur->sens_courant == EST_OUEST){
+    moniteur->sens_courant = OUEST_EST;
+  }
   moniteur->nb_train_ouest_est++;
 
   while(true){
@@ -106,9 +101,7 @@ extern void moniteur_voie_unique_entree_ouest( moniteur_voie_unique_t * moniteur
 
 extern void moniteur_voie_unique_sortie_est( moniteur_voie_unique_t * moniteur )
 {
-  /***********/
-  /* A FAIRE */
-  /***********/
+
   pthread_mutex_lock(&moniteur->mutex_moniteur);
 
   if(moniteur->nb_train_entrant == 0)
@@ -117,12 +110,15 @@ extern void moniteur_voie_unique_sortie_est( moniteur_voie_unique_t * moniteur )
   moniteur->nb_train_ouest_est--;
   moniteur->nb_train_entrant--;
 
-  if(moniteur->nb_train_entrant == moniteur->nb_train_max)
-    pthread_cond_wait(&moniteur->cond_Pleine, &moniteur->mutex_moniteur);
+  if(moniteur->nb_train_entrant == moniteur->nb_train_max-1)
+    pthread_cond_signal(&moniteur->cond_Pleine);
 
   if(moniteur->nb_train_ouest_est == 0){
     moniteur->sens_courant = EST_OUEST;
     pthread_cond_signal(&moniteur->sens_Est_Ouest);
+  }
+  else{
+      pthread_cond_signal(&moniteur->sens_Ouest_Est);
   }
 
   pthread_mutex_unlock(&moniteur->mutex_moniteur);
@@ -131,17 +127,19 @@ extern void moniteur_voie_unique_sortie_est( moniteur_voie_unique_t * moniteur )
 
 extern void moniteur_voie_unique_entree_est( moniteur_voie_unique_t * moniteur )
 {
-  /***********/
-  /* A FAIRE */
-  /***********/
+
   pthread_mutex_lock(&moniteur->mutex_moniteur);
 
   moniteur->nb_train_est_ouest++;
 
+  if (moniteur->nb_train_ouest_est == 0 && moniteur->sens_courant == OUEST_EST){
+    moniteur->sens_courant = EST_OUEST;
+  }
+
   while(true){
     if(moniteur->sens_courant == OUEST_EST){
       pthread_cond_wait(&moniteur->sens_Est_Ouest, &moniteur->mutex_moniteur);
-      pthread_cond_signal(&moniteur->sens_Ouest_Est);
+      pthread_cond_signal(&moniteur->sens_Est_Ouest);
     }
     else if(moniteur->nb_train_entrant == moniteur->nb_train_max){
       pthread_cond_wait(&moniteur->cond_Pleine, &moniteur->mutex_moniteur);
@@ -160,9 +158,7 @@ extern void moniteur_voie_unique_entree_est( moniteur_voie_unique_t * moniteur )
 
 extern void moniteur_voie_unique_sortie_ouest( moniteur_voie_unique_t * moniteur )
 {
-  /***********/
-  /* A FAIRE */
-  /***********/
+
   pthread_mutex_lock(&moniteur->mutex_moniteur);
 
   if(moniteur->nb_train_entrant == 0)
@@ -171,8 +167,8 @@ extern void moniteur_voie_unique_sortie_ouest( moniteur_voie_unique_t * moniteur
   moniteur->nb_train_est_ouest--;
   moniteur->nb_train_entrant--;
 
-  if(moniteur->nb_train_entrant == moniteur->nb_train_max)
-    pthread_cond_wait(&moniteur->cond_Pleine, &moniteur->mutex_moniteur);
+  if(moniteur->nb_train_entrant == moniteur->nb_train_max-1)
+    pthread_cond_signal(&moniteur->cond_Pleine);
 
   if(moniteur->nb_train_est_ouest == 0){
     moniteur->sens_courant = OUEST_EST;
@@ -196,10 +192,7 @@ voie_unique_t * moniteur_voie_unique_get( moniteur_voie_unique_t * const moniteu
 extern
 train_id_t moniteur_max_trains_get( moniteur_voie_unique_t * const moniteur )
 {
-  /***********/
-  /* A FAIRE */
-  /***********/
-  return( 1 ) ; /* valeur arbitraire ici */
+  return moniteur->nb_train_max;
 }
 
 /*

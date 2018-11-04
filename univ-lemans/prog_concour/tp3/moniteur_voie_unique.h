@@ -7,10 +7,7 @@
 typedef struct moniteur_voie_unique_s
 {
   /* Variables Gestion moniteur */
-  /***********/
-  /* A FAIRE */
-  /***********/
-
+  
   pthread_mutex_t mutex_moniteur;
   pthread_cond_t cond_Vide;
   pthread_cond_t cond_Pleine;
