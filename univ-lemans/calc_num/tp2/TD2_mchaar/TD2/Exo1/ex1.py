@@ -6,7 +6,7 @@ import os
 ###########################################
 #             Méthode Signal              #
 ###########################################
-def signal(t,frequence0,amplitude,phase): 
+def signal(t,frequence0,amplitude,phase):
     return amplitude * np.sin(2. * np.pi * frequence0 * t+phase)
 
 #######################################
@@ -29,7 +29,7 @@ def main():
     fe=1000 # frequence d'echationnage
     D=1 # période d'observation
     N=int(D*fe)+1 # nombre de points
-    
+
     te = np.linspace(0, 1, N) # Grille d'echantillonnage
     #te1=te[5:16] # te entre 50 ms et 150 ms. Remarque:plus qu'on augmente fe plus le signal se decale vers la gauche
     te1 = np.linspace(0.05, 0.15, N) # te entre 50 ms et 150 ms. Remarque: Intuitivement, nous pouvons penser qu’une bonne restitution du signal nécessite une fréquence d’échantillonnage élevée.
@@ -56,7 +56,7 @@ def main():
     ##############################################################
     #                   Question 7:                              #
     ##############################################################
-    # N° #  Fe  #   F0    # Période T0 réelle #  Période mesurée #             
+    # N° #  Fe  #   F0    # Période T0 réelle #  Période mesurée #
     ##############################################################
     # 1  #1000Hz#   10Hz  #        0.1 s      #      0.1 s       #
     # 2  #1000Hz#   300Hz #        0.004 s   #      0.005        #
@@ -68,10 +68,10 @@ def main():
     # Lorsque Fe < 2f0, on parle de repliement du spectre (aliasing). (https://www.youtube.com/watch?v=jHS9JGkEOmA)
 
     # Question 8:
-   
+
     f_name=("Signal1.wav","Signal2.wav","Signal3.wav")
     f=(300,500,900)
-    
+
     for fichier_name,f0 in zip(f_name,f):
             print(fichier_name,f0)
             signal_wav=signal(t,f0,amplitude,phase)
