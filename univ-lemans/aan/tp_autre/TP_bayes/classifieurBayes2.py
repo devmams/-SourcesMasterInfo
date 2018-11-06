@@ -22,8 +22,7 @@ def probPriorie(target,classe):
 #@target  : le tableau qui garde la reference entre les lignes  de la matrice et la classe correspondante
 #@classe  : la classe dont on veu le vecteur moyen (esperance)
 ######################
-def vecteurMoyen(matrice,target,classe):
-    
+def vecteurMoyen(matrice,target,classe): 
     dim1=0.0
     dim2=0.0
     dim3=0.0

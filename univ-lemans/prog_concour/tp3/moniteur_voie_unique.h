@@ -1,3 +1,7 @@
+/* NOM : DIALLO
+   PRENOM: MAMADOU
+*/
+
 #ifndef _MONITEUR_VOIE_UNIQUE_H_
 #define _MONITEUR_VOIE_UNIQUE_H_
 
@@ -7,7 +11,7 @@
 typedef struct moniteur_voie_unique_s
 {
   /* Variables Gestion moniteur */
-  
+
   pthread_mutex_t mutex_moniteur;
   pthread_cond_t cond_Vide;
   pthread_cond_t cond_Pleine;

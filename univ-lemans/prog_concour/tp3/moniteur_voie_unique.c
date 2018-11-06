@@ -1,3 +1,7 @@
+/* NOM : DIALLO
+   PRENOM: MAMADOU
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -110,7 +114,7 @@ extern void moniteur_voie_unique_sortie_est( moniteur_voie_unique_t * moniteur )
   moniteur->nb_train_ouest_est--;
   moniteur->nb_train_entrant--;
 
-  if(moniteur->nb_train_entrant == moniteur->nb_train_max-1)
+  if(moniteur->nb_train_entrant <= moniteur->nb_train_max-1)
     pthread_cond_signal(&moniteur->cond_Pleine);
 
   if(moniteur->nb_train_ouest_est == 0){
@@ -167,7 +171,7 @@ extern void moniteur_voie_unique_sortie_ouest( moniteur_voie_unique_t * moniteur
   moniteur->nb_train_est_ouest--;
   moniteur->nb_train_entrant--;
 
-  if(moniteur->nb_train_entrant == moniteur->nb_train_max-1)
+  if(moniteur->nb_train_entrant <= moniteur->nb_train_max-1)
     pthread_cond_signal(&moniteur->cond_Pleine);
 
   if(moniteur->nb_train_est_ouest == 0){
