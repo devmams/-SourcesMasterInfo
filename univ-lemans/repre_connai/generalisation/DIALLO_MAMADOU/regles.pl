@@ -1,3 +1,7 @@
+% Nom : DIALLO
+% Prenom : MAMADOU
+% predicat de depart : lanceJeu.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Le jeu d othello

@@ -1,3 +1,7 @@
+% Nom : DIALLO
+% Prenom : MAMADOU
+% predicat de depart : lanceJeu.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Le jeu d othello
@@ -77,13 +81,6 @@ toutesLesCases([[a,1],[b,1],[c,1],[d,1],[e,1],[f,1],[g,1],[h,1],
     [a,8],[b,8],[c,8],[d,8],[e,8],[f,8],[g,8],[h,8]]).
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Predicat : campAdverse/2
-% Usage : campAdverse(Camp,campAdverse) permet de trouver le camp advairse d un camp
-
-campAdverse(x,o).
-campAdverse(o,x).
-
 % Predicat : campJoueur2/1
 % Usage : campJoueur2(CampJ2) est satisfait si CampJ2 est le camp du joueur 2
 % Le campJoueur1 est defini dynamiquement en debut de jeu et peut etre modifie en fonction
@@ -93,81 +90,16 @@ campJoueur2(CampJ2):-
 	campJoueur1(CampJ1),
 	campAdverse(CampJ1,CampJ2),!.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Predicat : scoreLigne/3
-% Usage : scoreLigne(Ligne,Camp,Score) donne le nombre de pion Camp dans
-%	  la ligne de grille Ligne
+% Predicat : saisieUnCoup/2
+% Usage : saisieUnCoup(NomCol,NumLig) permet de saisir un coup a jouer
 
-scoreLigne([],_Camp,0):-!.
-
-scoreLigne([Camp|Suite],Camp,Score):-
-scoreLigne(Suite,Camp,Score1),
-Score is Score1 +1.
-
-scoreLigne([Tete|Suite],Camp,Score):-
-Tete \== Camp,
-scoreLigne(Suite,Camp,Score).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Predicat : score/3
-% Usage : score(Grille,Camp,Score) donne le nombre de pion Camp dans la
-%         grille Grille
-
-score([],_Camp,0):-!.
-
-score([Ligne1|Suite],Camp,Score):-
-scoreLigne(Ligne1,Camp,Score1),
-score(Suite,Camp,Score2),
-Score is Score1 + Score2.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Predicat : testerCoup/3
-% Usage : testerCoup(ListeCasesVides,Camp,Grille) verifie s il existe
-%	  des coups possibles pour le camp Camp dans la Grille, a partir
-%	  de la liste des cases vides
-
-testerCoup([[Colonne,Ligne]|Suite],Camp,Grille):-
-	leCoupEstValide(Camp,Grille,[Colonne,Ligne]);
-	testerCoup(Suite,Camp,Grille).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ligneDansGrille : verifier qu une ligne existe dans une grille;
-% caseDansLigne : verifier qu une case existe dans une ligne;
-% La methode consiste a tronquer la liste jusqu a arriver a la position qui nous interesse;
-% on decremente les index a chaque recursion,
-% la position qui nous interesse est en position 1 ou a.
-
-ligneDansGrille(1,[Tete|_],Tete).
-ligneDansGrille(NumLig,[_|Reste],Lig):-
-succNum(I,NumLig),
-ligneDansGrille(I,Reste,Lig).
-
-
-caseDansLigne(a,[Tete|_],Tete).
-caseDansLigne(Col,[_|Reste],Case):-
-succAlpha(I,Col),
-caseDansLigne(I,Reste,Case).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Predicat caseDeGrille/4
-% usage : caseDeGrille(NumColonne,NumLigne,Grille,Case) est satisfait si la
-%         Case correspond bien a l intersection de la de la colonne NumColonne
-%	  et de la ligne NumLigne dans le Grille
-
-caseDeGrille(NumColonne,NumLigne,Grille,Case):-
-ligneDansGrille(NumLigne,Grille,Ligne),
-caseDansLigne(NumColonne,Ligne,Case),!.
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% caseVide(Grille, NumLigne, NumColonne)
-% --> vérifier qu une case est vide, cad qu elle contient '-'
-
-caseVide(Grille, NumLigne, NumColonne):-donneValeurDeCase(Grille,NumLigne,NumColonne,-).
+saisieUnCoup(NomCol,NumLig):-
+	writeln('Entrez votre coup (sans oublier le point) :'),
+ 	writeln('Colonne (a, b, c, d, e, f, g ou h) : '),
+	saisieColonne(NomCol),
+	writeln('Ligne (1, 2, 3, 4, 5, 6, 7 ou 8) : '),
+	saisieLigne(NumLig).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Predicat : menuPrincipal/0
@@ -231,6 +163,7 @@ lanceChoix(1):-
 	saisieNomJoueur2,
 	% affiche la grille de depart
 	grilleDeDepart(Grille),
+  % afficheGrilleDep,
   afficheGrilleDep(Grille),
 	% initialise tous les coups disponibles au depart
 	toutesLesCasesDepart(ListeCoups),
@@ -333,7 +266,7 @@ moteurH1H2(Grille,ListeCoups,CampJ1):-
 	% jouer le coup dans la grille et mettre a jour la grille
 	joueLeCoupDansGrille(CampJ1,[NomCol,NumLig],Grille,GrilleArr),
 	% afficher la nouvelle grille
-	afficheGrille(GrilleArr),
+  afficheGrille(GrilleArr),
 	% afficher le score de chacun des joueurs
 	score(GrilleArr,CampJ1,ScoreJ1),
 	score(GrilleArr,CampJ2,ScoreJ2),

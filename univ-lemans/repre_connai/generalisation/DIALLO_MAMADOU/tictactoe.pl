@@ -1,43 +1,6 @@
-% Predicat : afficheLigne/1
-afficheLigne([A,B,C]) :-
-	write(A), tab(3),
-	write(B), tab(3),
-	write(C), tab(3).
-
-
-% Predicat : afficheGrille/1
-afficheGrille([[A1,B1,C1],[A2,B2,C2],[A3,B3,C3]]) :-
-	afficheLigne([A1,B1,C1]), nl,
-	afficheLigne([A2,B2,C2]), nl,
-	afficheLigne([A3,B3,C3]).
-
-
-% Predicat : succNum/2
-succNum(1,2).
-succNum(2,3).
-
-% Predicat : succAlpha/2
-succAlpha(a,b).
-succAlpha(b,c).
-
-
-% Predicat : ligneDeGrille(NumLigne, Grille, Ligne).
-% Satisfait si Ligne est la ligne numero NumLigne dans la Grille
-ligneDeGrille(1, [Test |_], Test).
-ligneDeGrille(NumLigne, [_|Reste],Test) :- succNum(I, NumLigne),
-		ligneDeGrille(I,Reste,Test).
-
-% Predicat : caseDeLigne(Col, Liste, Valeur).
-% Satisfait si Valeur est dans la colonne Col de la Liste
-caseDeLigne(a, [A|_],A).
-caseDeLigne(Col, [_|Reste],Test) :- succAlpha(I, Col),caseDeLigne(I,Reste, Test).
-
-
-% Predicat : caseDeGrille(NumCol, NumLigne, Grille, Case).
-% Satisfait si Case est la case de la Grille en position NumCol-NumLigne
-caseDeGrille(C,L,G, Elt) :- ligneDeGrille(L,G,Res),caseDeLigne(C,Res,Elt).
-
-
+% Nom : DIALLO
+% Prenom : MAMADOU
+% predicat de depart : lanceJeu.
 % Predicat : afficheCaseDeGrille(Colonne,Ligne,Grille) .
 afficheCaseDeGrille(C,L,G) :- caseDeGrille(C,L,G,Case),write(Case).
 
@@ -120,13 +83,13 @@ partieGagnee(Val, G) :- diagonaleDG(Val, G).
 
 % coordonneesOuListe(NomCol, NumLigne, Liste).
 % ?- coordonneesOuListe(a, 2, [a,2]). vrai.
-coordonneesOuListe(NomCol, NumLigne, [NomCol, NumLigne]).
+% coordonneesOuListe(NomCol, NumLigne, [NomCol, NumLigne]).
 
 
 % duneListeALautre(LC1, Case, LC2)
 % ?- duneListeALautre([[a,1],[a,2],[a,3]], [a,2], [[a,1],[a,3]]). est vrai
-duneListeALautre([A|B], A, B).
-duneListeALautre([A|B], C, [A|D]):- duneListeALautre(B,C,D).
+% duneListeALautre([A|B], A, B).
+% duneListeALautre([A|B], C, [A|D]):- duneListeALautre(B,C,D).
 
 
 % toutesLesCasesValides(Grille, LC1, C, LC2).
@@ -144,10 +107,6 @@ toutesLesCasesDepart([[a,1],[a,2],[a,3],[b,1],[b,2],[b,3],[c,1],[c,2],[c,3]]).
 grilleDeDepart([[-,-,-],[-,-,-],[-,-,-]]).
 
 campCPU(x).
-
-
-campAdverse(x,o).
-campAdverse(o,x).
 
 joueLeCoup(Case, Valeur, GrilleDep, GrilleArr) :-
 	coordonneesOuListe(Col, Lig, Case),
@@ -205,14 +164,14 @@ moteur(Grille, ListeCoups, Camp) :-
 	toutesLesCasesValides(Grille, ListeCoups, [Col, Lig], ListeCoupsNew),
 	moteur(GrilleArr, ListeCoupsNew, CPU).
 
-
 % Predicat : lanceJeu/0
 % Usage :  lanceJeu permet de lancer une partie.
 
 lanceJeu:-
-  grilleDeDepart(G),
+	consult(representation),
+	grilleDeDepart(G),
+	afficheGrilleDep(G),
 	toutesLesCasesDepart(ListeCoups),
-	afficheGrille(G),nl,
    writeln("L ordinateur est les x et vous etes les o."),
    writeln("Quel camp doit debuter la partie ? "),read(Camp),
 	toutesLesCasesDepart(ListeCoups),
