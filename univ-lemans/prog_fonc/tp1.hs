@@ -80,7 +80,6 @@ unite n =
     14 -> "quatorze"
     15 -> "quinze"
     16 -> "seize"
-    -- 100 -> "cent"
 
 dizaine n =
   case n of
@@ -111,5 +110,8 @@ ortho_nomrbre n =
       dizaine(fst(decomp)) ++ unite(snd(decomp))
     else
       dizaine(fst(decomp)) ++ "-" ++ unite(snd(decomp))
+
+
+-- à faire le dernier exo
 
 ---------------------------- FIN -------------------------------
