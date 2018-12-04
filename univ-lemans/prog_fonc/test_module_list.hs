@@ -29,3 +29,6 @@ main = do
   putStrLn $ "conjugue "++ show(bonbon) ++ " " ++ show(3) ++ " = " ++ show(conjugue bonbon 3)
   putStrLn $ "lyndon "++ show(aaab) ++ " = " ++ show(lyndon aaab)
   putStrLn $ "lyndon "++ show(villa) ++ " = " ++ show(lyndon villa)
+  putStrLn $ "inserer_liste "++ " = " ++ show(insere_liste [['0','1'],['1','0']] [['0','0','1'],['0','1']])
+  putStrLn $ "concat_liste_liste "++ " = " ++ show(concat_liste_liste [['0','0'],['0','1','0']] [['0','0','1'],['0','1'],['1','0'],['1','1']] [])
+  putStrLn $ "fusion_liste "++ " = " ++ show(fusion_liste [['0','0'],['0','1','0']] [['0','0','1'],['0','1'],['1','0'],['1','1']])

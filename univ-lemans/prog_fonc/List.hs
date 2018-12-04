@@ -139,7 +139,36 @@ ldn u l = case l of {
            else False
 }
 
+-------- question d
+appartient el l = case l of {
+  []  -> False;
+  t:r -> if el == t then True
+         else appartient el r;
+}
 
+insere_liste l1 l2 = case l1 of {
+    [] -> l2;
+    t:r -> if (appartient t l2) then insere_liste r l2
+           else insere_liste r (inserer t l2)
+}
+
+-------- question e
+concat_mot_liste m l lres = case l of {
+    [] -> lres;
+    t:r -> concat_mot_liste m r (inserer (concatener m t) lres)
+}
+
+concat_liste_liste l1 l2 lres = case l1 of {
+    [] -> lres;
+    t:r -> concatener (concat_mot_liste t l2 []) (concat_liste_liste r l2 lres)
+}
+
+fusion_liste l1 l2 = fus_l (concat_liste_liste l1 l2 []) []
+fus_l l lres = case l of {
+    [] -> insere_liste lres [];
+    t:r -> if lyndon t then fus_l r (t:lres)
+           else fus_l r lres
+}
 
 
 
