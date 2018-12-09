@@ -1,11 +1,11 @@
 import requests
-import numpy as np 
+import numpy as np
 from pylab import *
 
 ######################
 #Methode qui ajoute les biais a un ensemble de donnees
 #@vect1       : tableau de biais
-#@vect2       : tableau des donnees 
+#@vect2       : tableau des donnees
 ######################
 def ajoutBiais(vect1,vect2):
 
@@ -39,7 +39,7 @@ def convertTotabInt(data):
                 result[i,j] = int(1)
             else:
                 result[i,j] = int(-1)
-                
+
             j=j+1
         i=i+1
     return result
@@ -85,7 +85,7 @@ def train(trainData,vecteurPoids,iteration_max,alpha):
     bonne_classification1 = 0 #compteur sur le nombre delement bien classe par le vectoire poid en cours de traitement
     bonne_classification2 = 0 #compteur sur le nombre delement bien classe par le meilleur vecteur poid rencontré
 
-    iteration = 0 #compteur sur les iteration 
+    iteration = 0 #compteur sur les iteration
     iteration_ok = False #boolean qui permet de savoir si le systeme a convergé pour une iteration
     while(iteration_ok == False and iteration < iteration_max):#tant que le systeme n'a pas convergé et que le nombre d'iteration < iteration_max
         print("iteration %i " % iteration)
@@ -100,11 +100,11 @@ def train(trainData,vecteurPoids,iteration_max,alpha):
 
                 '''
                 si le vecteur de poid actuelle a permis de classé plus d'elements
-                que le meilleur vecteur de poid precedant 
+                que le meilleur vecteur de poid precedant
                 '''
                 if(bonne_classification1 > bonne_classification2):
                     '''
-                    alors on le definit comme nouveau meilleur vecteur de poid 
+                    alors on le definit comme nouveau meilleur vecteur de poid
                     '''
                     vecteurPoidsSup = vecteurPoids[:]
                     bonne_classification2 = bonne_classification1
@@ -151,7 +151,7 @@ def test(Data,vecteurPoids,target):
             cpt = cpt + 1
         i = i+1
 
-    taux_erreur = cpt/int(len(target)) 
+    taux_erreur = cpt/int(len(target))
     print("taux d'erreur = %f " %taux_erreur )
     return taux_erreur
 
@@ -174,7 +174,7 @@ voting_records = voting_records.replace('y','1')
 voting_records = voting_records.replace('n','-1')
 voting_records = voting_records.replace('?','0')
 voting_records = voting_records.split(',')
-voting_records.pop()
+# voting_records.pop()
 voting_records = np.reshape(voting_records,(-1,17))
 
 
@@ -185,7 +185,7 @@ np.random.seed(987654321)
 np.random.shuffle(voting_records)
 
 '''
-le systeme converge pour nb_elem_train <= 242 
+le systeme converge pour nb_elem_train <= 242
 et en ne melangent pas les donnees de depart (mettre en commentaire np.random.shuffle(voting_records) )
 '''
 nb_elem_train = 335 #nombre d'element dans le corpus de train
@@ -228,21 +228,11 @@ while(i < 3000):
 print(tabIteration)
 print(tabTauxErreur)
 
-#plot(tabIteration, tabTauxErreur, 'ro',color = 'b') 
+#plot(tabIteration, tabTauxErreur, 'ro',color = 'b')
 plot(tabIteration, tabTauxErreur)
 #plot(x2, y2,'ro',color = 'y')
 
 #plot(0, 3,'ro',marker='s',color = 'r')
 axis([0,3000,0.0,0.1])
-grid()          
+grid()
 show()
-
-
-
-
-
-
-
-
-
-

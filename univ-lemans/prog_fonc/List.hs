@@ -1,3 +1,7 @@
+-- NOM : DIALLO
+-- PRENOM : MAMADOU
+
+
 module List where
 ------------------------ question 1 -------------------------
 -------- question a
@@ -25,15 +29,6 @@ inserer el l = case l of {
           t:(inserer el r);
 }
 
-supprimer el l = suppr el l []
-suppr el l lres = case l of {
-  []  -> lres;
-  t:r -> if el == t then
-          (suppr el r lres)
-         else
-          t:(suppr el r lres);
-}
-
 trier l = case l of {
   []  -> [];
   t:r -> inserer t (trier r);
@@ -52,6 +47,16 @@ inv2 l lres = case l of {
 }
 
 ------------------------ question 2 -------------------------
+
+supprimer el l = suppr el l []
+suppr el l lres = case l of {
+  []  -> lres;
+  t:r -> if el == t then
+          (suppr el r lres)
+         else
+          t:(suppr el r lres);
+}
+
 -------- question a
 max_un l = max_un_ch l (head l)
 max_un_ch l res = case l of {
@@ -103,7 +108,6 @@ pref tcour l lres = case l of {
     t:r -> let tab = (concatener tcour [t]) in inserer tab (pref tab r lres)
 }
 
-
 -------- question b
 suffixes l = suff [] (inverse l) [[]]
 suff tcour l lres = case l of {
@@ -113,7 +117,7 @@ suff tcour l lres = case l of {
 
 ------- question 5 -------------------------
 -------- question a
-inferieur u v = u <= v
+inferieur u v = u < v
 
 -------- question b
 conjugue u i = conj u i [] [] 1
@@ -125,7 +129,7 @@ conj u i lres1 lres2 cpt = case u of {
 
 -------- question c
 
-liste_conjugues u = list_conj u [] 1
+liste_conjugues u = list_conj u [] 2
 list_conj u lres i =
   if i == (longueur u)+1 then
     lres
@@ -169,6 +173,11 @@ fus_l l lres = case l of {
     t:r -> if lyndon t then fus_l r (t:lres)
            else fus_l r lres
 }
+
+-------- question f
+
+genere 1 = [[0],[1]]
+genere n = insere_liste (fusion_liste (genere 1) (genere (n-1))) (fusion_liste (genere (n-1)) (genere 1))
 
 
 
