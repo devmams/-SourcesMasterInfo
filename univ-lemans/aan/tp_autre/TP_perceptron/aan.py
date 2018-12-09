@@ -162,8 +162,10 @@ def test(Data,vecteurPoids,target):
 
 print('============== Perceptron ============')
 
-iteration_max = int(input("Entrer le nombremaximum d’iterations:"))
-alpha = float(input("Entrer la valeur du learning right :"))
+iteration_max = 50
+# iteration_max = int(input("Entrer le nombremaximum d’iterations:"))
+# alpha = float(input("Entrer la valeur du learning right :"))
+alpha = 1
 
 #----- chargement et melange des données
 voting_records= requests.get('https://archive.ics.uci.edu/ml/machine-learning-databases/voting-records/house-votes-84.data')
@@ -174,7 +176,7 @@ voting_records = voting_records.replace('y','1')
 voting_records = voting_records.replace('n','-1')
 voting_records = voting_records.replace('?','0')
 voting_records = voting_records.split(',')
-# voting_records.pop()
+voting_records.pop()
 voting_records = np.reshape(voting_records,(-1,17))
 
 
