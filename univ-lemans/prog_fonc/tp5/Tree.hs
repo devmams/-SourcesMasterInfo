@@ -9,8 +9,6 @@ arbre = Node(
               Node(Empty,3,Node(Node(Empty,9,Empty),6,Empty))
             )
 
--- max a b = if a >= b then a else b
-
 hauteur arbre = case arbre of {
                   Empty -> 0;
                   Node(g,_,d) -> max( (hauteur g) + 1) ((hauteur d) + 1) ;
@@ -67,20 +65,6 @@ aff l = case l of {
   []  -> "";
   (nd,h):r ->  (espace h "") ++ "|__" ++ show(nd) ++ "\n" ++ (aff r)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ---------------------------- FIN ----------------------------

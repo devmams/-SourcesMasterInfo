@@ -180,5 +180,4 @@ genere 1 = [[0],[1]]
 genere n = insere_liste (fusion_liste (genere 1) (genere (n-1))) (fusion_liste (genere (n-1)) (genere 1))
 
 
-
 ---------------------------- FIN ----------------------------
