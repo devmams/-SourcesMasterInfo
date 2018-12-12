@@ -88,7 +88,7 @@ def train(trainData,vecteurPoids,iteration_max,alpha):
     iteration = 0 #compteur sur les iteration
     iteration_ok = False #boolean qui permet de savoir si le systeme a convergé pour une iteration
     while(iteration_ok == False and iteration < iteration_max):#tant que le systeme n'a pas convergé et que le nombre d'iteration < iteration_max
-        print("iteration %i " % iteration)
+        # print("iteration %i " % iteration)
 
         iteration_ok = True
         i=0
@@ -152,7 +152,7 @@ def test(Data,vecteurPoids,target):
         i = i+1
 
     taux_erreur = cpt/int(len(target))
-    print("taux d'erreur = %f " %taux_erreur )
+    # print("taux d'erreur = %f " %taux_erreur )
     return taux_erreur
 
 
@@ -223,18 +223,22 @@ while(i < 3000):
     tabIteration.append(i)
     #cacule du meilleur vecteur de poid
     vecteurPoids = train(trainData,vecteurPoids,i,alpha)
-    tabTauxErreur.append(test(testData,vecteurPoids,testTarget))
+    print(vecteurPoids)
+    print(test(testData,vecteurPoids,testTarget))
+    # tabTauxErreur.append(test(testData,vecteurPoids,testTarget))
 
     i=i+10
 
-print(tabIteration)
-print(tabTauxErreur)
+# print(tabIteration)
+# print(tabTauxErreur)
+print("------")
+print(vecteurPoids)
 
 #plot(tabIteration, tabTauxErreur, 'ro',color = 'b')
-plot(tabIteration, tabTauxErreur)
+# plot(tabIteration, tabTauxErreur)
 #plot(x2, y2,'ro',color = 'y')
 
 #plot(0, 3,'ro',marker='s',color = 'r')
-axis([0,3000,0.0,0.1])
-grid()
-show()
+# axis([0,3000,0.0,0.1])
+# grid()
+# show()
