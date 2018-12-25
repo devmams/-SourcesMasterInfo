@@ -1,0 +1,112 @@
+amount : montant
+duly : dument
+from scratch : a partir de rien
+robber, thief: voleur
+portray : representer
+crude : brut, vulgaire
+heed : tenir compte de
+retrieve : recuperer
+breach : violation
+layer : couche
+abscond : prendre la fuite
+grid : grille
+harvest : recolte
+culprit : coupable
+survey : sondage
+leap : saut
+overseas : etranger
+pull up : remonter, s'arreter
+creep up : se faufiler, ramper
+unwitting : involantaire
+stun : éblouir
+ludicrous : ridicule
+scary : effrayant
+brazenness : imprudence
+shame : honte
+shape : forme
+invad : envahir
+creepy : terrifiant
+skycraper : gratte ciel
+billboard : panneau d'affichage
+neat : soigné
+crossroad : carrefour
+cripple : paralyser
+storm : tempete, orage
+strech : etendu
+collapse : effondrer
+tear : dechirer
+fate : sort, destin
+looming : imminent
+custodian : gardien, conservateur
+reliable : fiable
+snapshot : instantané
+blink : cligner
+frailty : fragilite
+nonetheless : toutesfois
+upward : ascendant
+fierce : feroce
+fringe : frange, bord
+despise : mepriser
+landscape : paysage
+almost : presque
+gather : rassembler, reunir
+hold : porter
+ancient : ancien
+leisure : loisir
+blazing : brullant
+harsh : dur, sec, rude
+cattle : betail
+herder : berger, eleveur
+pasture : paturage
+dirty : sale
+herd : troupeau
+herdmen : berger
+worm : ver
+worn : usé (wear)
+bond : liaison
+dawn : aube
+toward : vers
+upon : sur
+restless : agité, inquiet
+wasteland : terre abandonnée
+barely : a peine
+dry : sec, aride
+remote : éloigné
+worthwhile : qui vaut le coup
+bring : apporter
+bring out : mettre en evidence
+smooth : lisse
+depiction : representation, description
+grassland : prairie, paturage
+grass : herbe
+mate : camarade
+loom : emergé, apparu
+masonry : maconnerie
+pimple : bouton
+laid out : aménagé
+clay : argile
+knead : petrir, malaxer
+thrive : prosperer
+lush : luxuriant
+pinnacle : sommet
+crown : couronne
+beneath : sous, dessous
+rear : elever, arriere
+rearing : élevage
+rearer : eleveur
+kingship : royauté
+mere : simple, seul
+merely : simplement, seulement
+ruled : gouverné
+remaining : restant
+linger : s'attarder
+lingering :persistant
+ruler : dirigeant, gouverneur
+dietie : divinités
+sway : empire
+knock : coup, cogner
+knock off : abattre
+onward : en avant
+bury : enterrer
+
+-----FIN------
