@@ -1,0 +1,23 @@
+L'objectif de  la tâche est de retrouver  les segments d'allocutions
+de François Mitterrand dans un corpus d'allocutions de Jacques Chirac,
+sachant qu'il  y avait au plus  un segment de  François Mitterrand par
+allocution de Jacques Chirac.
+
+Pour  moduler la  difficulté de  la  tâche, deux corpus ont été
+constitués :
+
+- corpus 1 :  les années et les noms de  personnes ont été anonymisés
+et remplacés par les balises <date> et <nom>
+
+- corpus 2 : le corpus intégral
+
+Description des fichiers de l'archive :
+
+- corpus.tache1.learn : le corpus d'apprentissage du corpus 1
+
+- corpus.tache1.test : le corpus de test du corpus 1
+
+- corpus.tache2.learn : le corpus d'apprentissage du corpus 2
+
+- corpus.tache2.test : le corpus de test du corpus 2
+
