@@ -7,13 +7,13 @@ def StockerLigne(line, dicPron):
     i = 0
     while(line[i] != ';'):
         mot += line[i]
-        i += 1;
+        i += 1
     while(line[i+1] != ';'):
-        i += 1;
+        i += 1
     i += 2
     while(i+1 != len(line)):
         val += line[i+1]
-        i += 1;
+        i += 1
     dicPron[mot] = val.strip("\n")
 
 def AfficherPron(m, dicPron):
